@@ -1,19 +1,19 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Sensor {
+export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  deviceName: string;
+  email: string;
 
   @Column()
-  devEui: string;
+  firstName: string;
 
   @Column()
-  devAddr: string;
+  lastName: string;
 
-  @Column()
-  applicationName: string;
+  @Column({ default: true })
+  isActive: boolean;
 }
