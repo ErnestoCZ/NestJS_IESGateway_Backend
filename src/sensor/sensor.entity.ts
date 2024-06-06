@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { SensorData } from 'src/sensor-data/sensor-data.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class Sensor {
@@ -9,11 +10,14 @@ export class Sensor {
   deviceName: string;
 
   @Column()
-  devEui: string;
+  deviceEui: string;
 
   @Column()
-  devAddr: string;
+  deviceAddr: string;
 
   @Column()
   applicationName: string;
+
+  @OneToMany(() => SensorData, (sensorData) => sensorData.sensor)
+  sensorData: SensorData[];
 }
