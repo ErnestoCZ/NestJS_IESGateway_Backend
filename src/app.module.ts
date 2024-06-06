@@ -6,6 +6,8 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/users.entity';
 import { Sensor } from './sensor/sensor.entity';
+import { SensorDataModule } from './sensor-data/sensor-data.module';
+import { SensorData } from './sensor-data/sensor-data.entity';
 
 @Module({
   imports: [
@@ -18,10 +20,11 @@ import { Sensor } from './sensor/sensor.entity';
       username: 'root',
       password: 'mysecretpassword',
       database: 'gateway',
-      entities: [User, Sensor],
+      entities: [User, Sensor, SensorData],
       synchronize: true,
       retryDelay: 5000,
     }),
+    SensorDataModule,
   ],
   controllers: [AppController],
   providers: [AppService],
