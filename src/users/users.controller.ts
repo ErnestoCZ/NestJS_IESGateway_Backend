@@ -6,7 +6,6 @@ import {
   UsePipes,
   ValidationPipe,
   Query,
-  UseInterceptors,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dtos/createUser.dto';

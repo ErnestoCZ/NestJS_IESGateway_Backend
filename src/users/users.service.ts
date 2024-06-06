@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './users.entity';
@@ -19,7 +15,7 @@ export class UsersService {
     fN: string,
     lN: string,
     isActive: boolean,
-  ) {
+  ): Promise<User> {
     const foundUsers = await this.findUsers(email);
     console.log(foundUsers);
     if (foundUsers.length === 0) {

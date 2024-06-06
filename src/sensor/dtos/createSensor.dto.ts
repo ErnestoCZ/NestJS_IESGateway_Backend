@@ -12,4 +12,7 @@ export class CreateSensorDto {
 
   @IsString()
   applicationName: string;
+
+  @IsString()
+  applicationId: string;
 }

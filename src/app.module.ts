@@ -23,6 +23,7 @@ import { SensorData } from './sensor-data/sensor-data.entity';
       entities: [User, Sensor, SensorData],
       synchronize: true,
       retryDelay: 5000,
+      retryAttempts: 10,
     }),
     SensorDataModule,
   ],
