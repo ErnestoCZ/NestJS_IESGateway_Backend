@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './users.entity';
@@ -16,27 +20,32 @@ export class UsersService {
     lN: string,
     isActive: boolean,
   ) {
-    const newUserObject: Partial<User> = {
-      email: email,
-      password: password,
-      firstName: fN,
-      lastName: lN,
-      isActive: isActive,
-    };
+    const foundUsers = await this.findUsers(email);
+    console.log(foundUsers);
+    if (foundUsers.length === 0) {
+      //TODO encrypt password and store it into database
+      const newUserObject: Partial<User> = {
+        email: email,
+        password: password,
+        firstName: fN,
+        lastName: lN,
+        isActive: isActive,
+      };
 
-    const user = this.usersRepository.create(newUserObject);
-    const result = await this.usersRepository.save(user);
-    return result;
+      const createUser = this.usersRepository.create(newUserObject);
+      const createdUser = await this.usersRepository.save(createUser);
+      return createdUser;
+    } else {
+      throw new BadRequestException('User already exists');
+    }
   }
 
-  async findUsers(email: string) {
+  async findUsers(email: string): Promise<User[]> | null {
     const findUsersResult = await this.usersRepository.find({
       where: { email: email },
     });
 
-    if (findUsersResult.length === 0) {
-      throw new NotFoundException(`User with email ${email} not found`);
-    } else if (findUsersResult.length === 1) {
+    if (findUsersResult.length === 1) {
       return findUsersResult;
     } else {
       return findUsersResult;

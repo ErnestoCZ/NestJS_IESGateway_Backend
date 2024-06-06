@@ -6,11 +6,15 @@ import {
   UsePipes,
   ValidationPipe,
   Query,
+  UseInterceptors,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dtos/createUser.dto';
 import { FindUsersDto } from './dtos/findUsers.dto';
+import { Serialize } from 'src/interceptors/transform/transform.interceptor';
+import { UserDto } from './dtos/user.dto';
 
+@Serialize(UserDto)
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
