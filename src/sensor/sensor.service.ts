@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Sensor } from './sensor.entity';
 import { Repository } from 'typeorm';
@@ -9,12 +14,12 @@ export class SensorService {
   constructor(
     @InjectRepository(Sensor) private sensorRepository: Repository<Sensor>,
   ) {}
-  async findSensorById(id: number): Promise<number> {
+  async findSensorById(id: number): Promise<Sensor> {
     const found = await this.sensorRepository.findOneBy({ id: id });
     if (found === null) {
-      throw new NotFoundException(`Sensor not found with id ${id}`);
+      throw new NotFoundException(`Sensor with id ${id} not found`);
     }
-    return 1;
+    return found;
   }
 
   async createSensor(sensor: CreateSensorDto) {
@@ -27,6 +32,21 @@ export class SensorService {
       const saveResult = await this.sensorRepository.save(newSensor);
       return saveResult;
     } else {
+      throw new HttpException(
+        `Sensor with name ${sensor.deviceName} already exists`,
+        HttpStatus.BAD_REQUEST,
+      );
     }
+  }
+
+  async findSensor(deviceName: string, deviceEui: string, deviceAddr: string) {
+    const result = await this.sensorRepository.find({
+      where: {
+        deviceName: deviceName,
+        deviceAddr: deviceAddr,
+        deviceEui: deviceEui,
+      },
+    });
+    return result;
   }
 }

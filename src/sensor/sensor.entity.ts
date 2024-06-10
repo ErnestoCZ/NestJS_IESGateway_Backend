@@ -18,9 +18,6 @@ export class Sensor {
   @Column()
   applicationName: string;
 
-  @Column()
-  applicationId: string;
-
   @OneToMany(() => SensorData, (sensorData) => sensorData.sensor)
   sensorData: SensorData[];
 }

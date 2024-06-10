@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 
-export class CreateSensorDto {
+export class FindSensorDto {
   @IsString()
   deviceName: string;
 
@@ -9,10 +9,4 @@ export class CreateSensorDto {
 
   @IsString()
   deviceAddr: string;
-
-  @IsString()
-  applicationName: string;
-
-  // @IsString()
-  // applicationId: string;
 }
