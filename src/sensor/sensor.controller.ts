@@ -11,6 +11,11 @@ export class SensorController {
     return this.sensorService.findSensorById(Number(id));
   }
 
+  @Get('/')
+  findAllSensors() {
+    return this.sensorService.findAll();
+  }
+
   @Post()
   createSensor(@Body() body: CreateSensorDto) {
     return this.sensorService.createSensor(body);

@@ -49,4 +49,12 @@ export class SensorService {
     });
     return result;
   }
+
+  async findAll() {
+    const result = await this.sensorRepository
+      .createQueryBuilder('sensor')
+      .select('*')
+      .getRawMany();
+    return result;
+  }
 }
