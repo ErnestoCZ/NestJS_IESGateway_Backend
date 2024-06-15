@@ -16,9 +16,9 @@ export class SensorDataService {
   async createSensorDataPoint(sensorDataInformation: CreateSensorDataDto) {
     //Check Sensor exists
     const foundSensors = await this.sensorService.findSensor(
-      sensorDataInformation.deviceName,
-      sensorDataInformation.deviceEui,
-      sensorDataInformation.deviceAddr,
+      sensorDataInformation.device_name,
+      sensorDataInformation.device_eui,
+      sensorDataInformation.device_addr,
     );
 
     if (foundSensors.length === 1) {
@@ -39,10 +39,11 @@ export class SensorDataService {
     } else if (foundSensors.length === 0) {
       //else create Sensor and then create a DataPoint related to this Sensor
       const newSensor = await this.sensorService.createSensor({
-        deviceAddr: sensorDataInformation.deviceAddr,
-        deviceEui: sensorDataInformation.deviceEui,
-        deviceName: sensorDataInformation.deviceName,
-        applicationName: sensorDataInformation.applicationName,
+        device_addr: sensorDataInformation.device_addr,
+        device_eui: sensorDataInformation.device_eui,
+        device_name: sensorDataInformation.device_name,
+        application_name: sensorDataInformation.application_name,
+        application_id: sensorDataInformation.application_id,
       });
       const newSensorData = this.sensorDataRepository.create({
         forceX: sensorDataInformation.forceX,

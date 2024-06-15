@@ -2,17 +2,17 @@ import { IsString } from 'class-validator';
 
 export class CreateSensorDto {
   @IsString()
-  deviceName: string;
+  device_name: string;
 
   @IsString()
-  deviceEui: string;
+  device_eui: string;
 
   @IsString()
-  deviceAddr: string;
+  device_addr: string;
 
   @IsString()
-  applicationName: string;
+  application_name: string;
 
-  // @IsString()
-  // applicationId: string;
+  @IsString()
+  application_id: string;
 }

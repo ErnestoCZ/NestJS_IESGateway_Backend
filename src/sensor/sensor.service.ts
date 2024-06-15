@@ -24,7 +24,7 @@ export class SensorService {
 
   async createSensor(sensor: CreateSensorDto) {
     const result = await this.sensorRepository.find({
-      where: { deviceName: sensor.deviceName },
+      where: { device_name: sensor.device_name },
     });
 
     if (result.length === 0) {
@@ -33,7 +33,7 @@ export class SensorService {
       return saveResult;
     } else {
       throw new HttpException(
-        `Sensor with name ${sensor.deviceName} already exists`,
+        `Sensor with name ${sensor.device_name} already exists`,
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -42,9 +42,9 @@ export class SensorService {
   async findSensor(deviceName: string, deviceEui: string, deviceAddr: string) {
     const result = await this.sensorRepository.find({
       where: {
-        deviceName: deviceName,
-        deviceAddr: deviceAddr,
-        deviceEui: deviceEui,
+        device_name: deviceName,
+        device_addr: deviceAddr,
+        device_eui: deviceEui,
       },
     });
     return result;

@@ -1,5 +1,12 @@
 import { SensorData } from 'src/sensor-data/sensor-data.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Sensor {
@@ -7,17 +14,26 @@ export class Sensor {
   id: number;
 
   @Column()
-  deviceName: string;
+  device_name: string;
 
   @Column()
-  deviceEui: string;
+  device_eui: string;
 
   @Column()
-  deviceAddr: string;
+  device_addr: string;
 
   @Column()
-  applicationName: string;
+  application_name: string;
+
+  @Column()
+  application_id: string;
 
   @OneToMany(() => SensorData, (sensorData) => sensorData.sensor)
   sensorData: SensorData[];
+
+  @CreateDateColumn()
+  create_date: Date;
+
+  @UpdateDateColumn()
+  update_date: Date;
 }
