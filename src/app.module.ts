@@ -18,7 +18,7 @@ import { SensorData } from './sensor-data/sensor-data.entity';
       host: 'localhost',
       port: 5432,
       username: 'root',
-      password: 'mysecretpassword',
+      password: 'root',
       database: 'gateway',
       entities: [User, Sensor, SensorData],
       synchronize: true,
