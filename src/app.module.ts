@@ -9,6 +9,7 @@ import { User } from './users/users.entity';
 import { Sensor } from './sensor/sensor.entity';
 import { SensorData } from './sensor-data/sensor-data.entity';
 // import { dataSourceOptions } from '../db/data-source';
+export const JWTSecret = process.env.JWT_SECRET;
 
 @Module({
   imports: [

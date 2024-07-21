@@ -6,6 +6,7 @@ import {
   UsePipes,
   ValidationPipe,
   Query,
+  Session,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dtos/createUser.dto';
@@ -29,8 +30,15 @@ export class UsersController {
   }
 
   @Post('/signin')
-  signinUser(@Body() body: SignInUserDto) {
-    return this.authService.signin(body);
+  signinUser(
+    @Body() body: SignInUserDto,
+    @Session() session: Record<string, any>,
+  ) {
+    return this.authService.signin(body, session);
+  }
+  @Get('/signout')
+  signOutUser(@Session() session: Record<string, any>) {
+    this.authService.signOut(session);
   }
 
   @Get()

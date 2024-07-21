@@ -1,8 +1,10 @@
-import { Controller, Get, Param, Post, Body } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, UseGuards } from '@nestjs/common';
 import { SensorService } from './sensor.service';
 import { CreateSensorDto } from './dtos/createSensor.dto';
+import { AuthGuard } from 'src/Guards/auth.guard';
 
 @Controller('sensor')
+@UseGuards(new AuthGuard())
 export class SensorController {
   constructor(private sensorService: SensorService) {}
 

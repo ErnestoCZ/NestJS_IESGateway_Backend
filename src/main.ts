@@ -1,8 +1,11 @@
+import * as dotenv from 'dotenv';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { LoggingInterceptor } from './interceptors/logging.interceptor';
 import * as session from 'express-session';
+
+dotenv.config({ path: './config.env' });
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -15,6 +18,8 @@ async function bootstrap() {
       saveUninitialized: true,
     }),
   );
-  await app.listen(3002);
+  await app.listen(process.env.PORT, () => {
+    console.log(`App started listening on ${process.env.PORT}`);
+  });
 }
 bootstrap();
