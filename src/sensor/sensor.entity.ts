@@ -10,7 +10,7 @@ import {
 
 @Entity()
 export class Sensor {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column()
