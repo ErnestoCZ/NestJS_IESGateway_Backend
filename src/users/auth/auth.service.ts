@@ -19,7 +19,6 @@ export class AuthService {
       throw new BadRequestException('wrong email or password');
     } else if (foundUserResult.length === 1) {
       if (compareSync(userDetails.password, foundUserResult.at(0).password)) {
-        console.log(process.env.JWT_SECRET);
         const signedJWT = JWT.sign(
           {
             exp: Math.floor(Date.now() / 1000) + 60 * 60,
@@ -28,9 +27,7 @@ export class AuthService {
           process.env.JWT_SECRET ?? '',
         );
         session.JWT = signedJWT;
-        console.log('password is correct');
       } else {
-        console.log('password is not correct');
         throw new BadRequestException();
       }
     }

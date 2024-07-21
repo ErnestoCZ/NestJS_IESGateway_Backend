@@ -34,6 +34,15 @@ $ npm install
 
 ## Running the app
 
+1. Create a config.env in root directory
+2. Set following config variables
+   - JWT_SECRET
+   - SESSION_SECRET
+   - PORT
+3. Run one of the following commands:
+
+
+
 ```bash
 # development
 $ npm run start

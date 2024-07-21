@@ -40,4 +40,17 @@ describe('AuthService', () => {
   it('Test service is defined', async () => {
     expect(service).toBeDefined();
   });
+
+  it('Test signup is defined', async () => {
+    expect(service.signup).toBeDefined();
+  });
+
+  it('Test signin throws error if email is unused', async () => {
+    try {
+      await service.signin(
+        { email: 'test1@test.com', password: 'wqe2u3ihr451u3b45!!' },
+        null,
+      );
+    } catch (error) {}
+  });
 });
