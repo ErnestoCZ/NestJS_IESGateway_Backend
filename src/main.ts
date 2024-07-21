@@ -13,7 +13,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new LoggingInterceptor());
   app.use(
     session({
-      secret: 'session',
+      secret: process.env.SESSION_SECRET,
       resave: false,
       saveUninitialized: true,
     }),
