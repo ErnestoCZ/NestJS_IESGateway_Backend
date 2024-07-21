@@ -4,10 +4,11 @@ import { AppService } from './app.service';
 import { SensorModule } from './sensor/sensor.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SensorDataModule } from './sensor-data/sensor-data.module';
 import { User } from './users/users.entity';
 import { Sensor } from './sensor/sensor.entity';
-import { SensorDataModule } from './sensor-data/sensor-data.module';
 import { SensorData } from './sensor-data/sensor-data.entity';
+// import { dataSourceOptions } from '../db/data-source';
 
 @Module({
   imports: [
@@ -18,12 +19,10 @@ import { SensorData } from './sensor-data/sensor-data.entity';
       host: 'localhost',
       port: 5432,
       username: 'root',
-      password: 'root',
-      database: 'gateway',
+      password: '1234',
+      database: 'testDB',
       entities: [User, Sensor, SensorData],
       synchronize: true,
-      retryDelay: 5000,
-      retryAttempts: 10,
     }),
     SensorDataModule,
   ],

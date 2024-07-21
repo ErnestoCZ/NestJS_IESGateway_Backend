@@ -2,7 +2,6 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './users.entity';
-import { genSaltSync, compareSync, getSalt } from 'bcrypt-ts';
 
 @Injectable()
 export class UsersService {
@@ -20,8 +19,6 @@ export class UsersService {
     const foundUsers = await this.findUsers(email);
     console.log(foundUsers);
     if (foundUsers.length === 0) {
-      //TODO encrypt password and store it into database
-
       const newUserObject: Partial<User> = {
         email: email,
         password: password,
